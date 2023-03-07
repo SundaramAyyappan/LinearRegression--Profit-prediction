@@ -14,15 +14,15 @@ import streamlit as st
 
 from PIL import Image
 
-pickle_in = open("model.pkl","rb")
+pickle_in = open("REG.pkl","rb")
 classifier=pickle.load(pickle_in)
 
 def welcome():
     return "Welcome All"
 
-def Profit_prediction(RnD_Spend, Administration, Marketing_Spend):
+def Profit_prediction(RnD, Administration, Marketing):
     
-    prediction=classifier.predict([[RnD_Spend, Administration, Marketing_Spend]])
+    prediction=classifier.predict([[RnD, Administration, Marketing]])
     print(prediction)
     
     return prediction
@@ -40,9 +40,9 @@ def main():
     st.markdown(html_temp,unsafe_allow_html=True)
     
     
-    RnD_Spend = st.number_input('Insert RnD_Spend')
+    RnD = st.number_input('Insert RnD')
     Administration = st.number_input('Insert Administration')
-    Marketing_Spend = st.number_input('Insert Marketing_Spend')
+    Marketing = st.number_input('Insert Marketing')
     
     
     #code for prediction (the result of prediction will return in this empty string)
@@ -50,7 +50,7 @@ def main():
     
     #creating button for prediction
     if st.button('Profit Result'):
-        Profit = Profit_prediction(RnD_Spend, Administration, Marketing_Spend)
+        Profit = Profit_prediction(RnD, Administration, Marketing)
     
     
     st.success('The Profit will be {} '.format(Profit))
